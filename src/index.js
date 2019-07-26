@@ -6,9 +6,13 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 
 // Initializations
+    // bootstrap app
 const app = express();
+    // mongoose connect
+require('./database');
 
 // Settings
+
     // local and cloud
 app.set('port', process.env.PORT || 3000);
     // path views concatenate to src > src/views
@@ -24,7 +28,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // Middlewares 
-    // receive only data
+    // receive only data for authentication
 app.use(express.urlencoded({extended:false}));
     // forms can request put and delete
 app.use(methodOverride('_method'));
@@ -44,6 +48,7 @@ app.use(require('./routes/products'));
 app.use(require('./routes/notes'));
 
 // Static files
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Server is listening
 app.listen(app.get('port'), () => {
