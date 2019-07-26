@@ -4,16 +4,16 @@ const router = express.Router();
 
 // get login
 router.get('/', (req,res) => {
-    res.send('Index');
+    res.render('index')
 })
 
 // get about
-router.get('/', (req,res) => {
-    res.send('Index');
+router.get('/about', (req,res) => {
+    res.render('about');
 })
 
 // get forget password
-router.get('/', (req,res) => {
+router.get('/restore', (req,res) => {
     res.send('Index');
 })
 
