@@ -57,10 +57,25 @@ router.post('/products/new-product', async (req, res) => {
         const newProduct = new Product({name, description, startdate, enddate});
         // make this and follow with the next instruction
         await newProduct.save();
+        req.flash('success_msg', 'Producto Agregado Correctamente');
         // load all products   
         res.redirect('/products');
     }
 });
 
+// edit a product
+router.put('/products/edit-product/:id', async (req, res) => {
+    const { name, description, startdate, enddate  } = req.body;
+    await Product.findByIdAndUpdate(req.params.id, { name, description, startdate, enddate});
+    req.flash('success_msg', 'Producto actualizado')
+    res.redirect('/products');
+});
+
+// delete a product 
+router.delete('/products/delete/:id', async (req, res) => {
+    await Product.findByIdAndDelete(req.params.id)
+    req.flash('success_msg', 'Producto Eliminado')
+    res.redirect('/products')
+});
 
 module.exports = router;

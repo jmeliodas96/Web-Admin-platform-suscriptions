@@ -14,9 +14,12 @@
                     <p>
                         {{enddate}}
                     </p>
-                    <button class="btn btn-danger btn-block btn-sm">
-                        Delete
-                    </button>
+                    <form action="/products/delete/{{_id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger btn-block btn-sm" type="submit">
+                            Eliminar
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
