@@ -5,12 +5,15 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
 
 // Initializations
     // bootstrap app
 const app = express();
     // mongoose connect
 require('./database');
+
+require('./config/passport');
 
 // Settings
 
@@ -40,9 +43,14 @@ app.use(session({
     saveUninitialized:true
 }));
 
+//  passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // flash for send messages to the user
 app.use(flash());
- 
+
 // Global variables
     // store messages
 app.use((req, res, next) => {
