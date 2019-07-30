@@ -4,7 +4,11 @@ const router = express.Router();
 // models
 const User = require('../models/user');
 
-// init session
+// passport
+const passport = require('passport');
+
+
+// get form for signin
 router.get('/users/signin', (req, res) => {
     res.render('users/signin');
 });
@@ -13,6 +17,14 @@ router.get('/users/signin', (req, res) => {
 router.get('/users/signup', (req, res) => {
     res.render('users/signup');
 });
+
+
+// init session and authenticate user
+router.post('/users/signin', passport.authenticate('local', {
+    successRedirect:'/products',
+    failureRedirect:'/users/signin',
+    failureFlash: true
+}));
 
 // register user
 router.post('/users/signup', async (req, res) => {
@@ -48,15 +60,15 @@ router.post('/users/signup', async (req, res) => {
         });
     } else {
         const emailUser = await User.findOne({email: email});
-        if(!emailUser) {
-            req.flash('error_msg', 'El email ya esta en uso!');
-            res.redirect('/users/signup');
+        // if(!emailUser) {
+        //     req.flash('error_msg', 'El email ya esta en uso!');
+        //     res.redirect('/users/signup');
 
-        }
+        // }
         const newUser =  new User({name, email, password, confirm_password});
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
-        req.flash('success_msg', 'Te has registrado exitosammente!');
+        req.flash('success_msg', 'Te has registrado exitosamente!');
         res.redirect('/users/signin');
     }
 

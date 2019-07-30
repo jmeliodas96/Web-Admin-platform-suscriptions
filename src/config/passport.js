@@ -8,11 +8,13 @@ passport.use(new LocalStrategy({
     usernameField:'email'
 }, async (email, password, done) => {
     const user = await User.findOne({email:email});
+    console.log(user);
     if(!user){
         // null > no errors, false > not user found, message > message
         return done(null, false, {message:'Usuario no encontrado'});
     } else {
-        const match = await User.matchPassword(password);
+        console.log(password);
+        const match = await user.matchPassword(password);
         if(match){
             // callback
             return done(null, user);
@@ -30,7 +32,7 @@ passport.serializeUser((user, done) => {
 
 // user is found
 passport.deserializeUser((id, done) => {
-    User.findById(id, (errr, done) => {
+    User.findById(id, (err, done) => {
         done(err, user);
     });
 })

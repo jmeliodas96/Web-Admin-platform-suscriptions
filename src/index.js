@@ -12,7 +12,7 @@ const passport = require('passport');
 const app = express();
     // mongoose connect
 require('./database');
-
+    //passport 
 require('./config/passport');
 
 // Settings
@@ -57,7 +57,6 @@ app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.errors_msg = req.flash('error_msg');
     next();
-
 });
 
 // Routes

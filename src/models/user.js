@@ -9,7 +9,7 @@ const UserSchema = new Schema({
     password:{type:String, required: true},
     date:{type:Date, default:Date.now}
     
-})
+});
 
 // encrypt password > async function
 UserSchema.methods.encryptPassword = async (password) => {
@@ -23,7 +23,7 @@ UserSchema.methods.encryptPassword = async (password) => {
 UserSchema.methods.matchPassword = async function (password) {
     // compare password incoming vs password in schema
     return await bcrypt.compare(password, this.password);
-}
+};
 
 // pass a name and schema
 module.exports = mongoose.model('User', UserSchema)
