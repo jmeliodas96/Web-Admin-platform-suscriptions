@@ -11,7 +11,7 @@ passport.use(new LocalStrategy({
     console.log(user);
     if(!user){
         // null > no errors, false > not user found, message > message
-        return done(null, false, {message:'Usuario no encontrado'});
+        return done(null, false, { message:'Usuario no encontrado'});
     } else {
         console.log(password);
         const match = await user.matchPassword(password);
@@ -26,13 +26,13 @@ passport.use(new LocalStrategy({
 
 // store session
 passport.serializeUser((user, done) => {
-    // return callback
     done(null, user.id);
 });
 
 // user is found
 passport.deserializeUser((id, done) => {
-    User.findById(id, (err, done) => {
+    User.findById(id, (err, user) => {
+        console.log(user);
         done(err, user);
     });
-})
+});
