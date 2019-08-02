@@ -18,7 +18,7 @@ require('./config/passport');
 // Settings
 
     // local and cloud
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
     // path views concatenate to src > src/views
 app.set('views', path.join(__dirname, 'views'));
     // handlebars > engine template
@@ -42,12 +42,9 @@ app.use(session({
     resave:true,
     saveUninitialized:true
 }));
-
 //  passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 // flash for send messages to the user
 app.use(flash());
 
@@ -56,6 +53,7 @@ app.use(flash());
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.errors_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
     next();
 });
 
