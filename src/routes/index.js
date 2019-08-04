@@ -17,6 +17,17 @@ router.get('/restore', (req,res) => {
     res.send('Index');
 })
 
+// offers
+router.get('/suscribe', (req, res) => {
+    res.render('offers');
+});
+
+// adding offer
+router.post('/suscribe/add', (req, res) => {
+    console.log(req.body);
+    res.send('added');
+})
+
 
 // exporting
 module.exports = router; 

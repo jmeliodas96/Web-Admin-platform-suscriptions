@@ -26,6 +26,12 @@ router.post('/users/signin', passport.authenticate('local', {
     failureFlash: true
 }));
 
+// logout user
+router.get('/users/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
 // register user
 router.post('/users/signup', async (req, res) => {
     const {name, email, password, confirm_password } = req.body;

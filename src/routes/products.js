@@ -3,9 +3,11 @@ const router = express.Router();
 
 // models is like a class(schema)
 const Product = require('../models/product');
+// auth
+const { isAuthenticated } = require('../helpers/auth');
 
 // retrieve all products > async function
-router.get('/products', async (req, res) => {
+router.get('/products', isAuthenticated, async (req, res) => {
     // find all into collections products
     const products =  await Product.find().sort({date: 'desc'});
     // render and pass object
@@ -13,12 +15,12 @@ router.get('/products', async (req, res) => {
 });
 
 // form for add product
-router.get('/products/add', (req, res) => {
+router.get('/products/add', isAuthenticated, (req, res) => {
     res.render('products/new-product');
 });
 
 // form for edit
-router.get('/products/edit/:id', async (req, res) => {
+router.get('/products/edit/:id', isAuthenticated, async (req, res) => {
     // find data for edit by id
     const product = await Product.findById(req.params.id);
     res.render('products/edit-product', { product });
@@ -26,7 +28,7 @@ router.get('/products/edit/:id', async (req, res) => {
 
 
 // create a new product > async function
-router.post('/products/new-product', async (req, res) => {
+router.post('/products/new-product', isAuthenticated, async (req, res) => {
     const { name, description, startdate, enddate } = req.body;
     // validate errors
     const errors = [];
@@ -64,7 +66,7 @@ router.post('/products/new-product', async (req, res) => {
 });
 
 // edit a product
-router.put('/products/edit-product/:id', async (req, res) => {
+router.put('/products/edit-product/:id', isAuthenticated, async (req, res) => {
     const { name, description, startdate, enddate  } = req.body;
     await Product.findByIdAndUpdate(req.params.id, { name, description, startdate, enddate});
     req.flash('success_msg', 'Producto actualizado')
@@ -72,7 +74,7 @@ router.put('/products/edit-product/:id', async (req, res) => {
 });
 
 // delete a product 
-router.delete('/products/delete/:id', async (req, res) => {
+router.delete('/products/delete/:id', isAuthenticated, async (req, res) => {
     await Product.findByIdAndDelete(req.params.id)
     req.flash('success_msg', 'Producto Eliminado')
     res.redirect('/products')

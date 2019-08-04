@@ -1,0 +1,55 @@
+<div class="row">
+    <form action="/suscribe/add" method="POST">
+        <div class="col-md-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <h4 class="card-title d-flex justify-content-between align-items-center">
+                        Camisetas        
+                    </h4>
+                    <p>
+                        <img src="img/offer1.jpg" alt="camisetas" class="rounded-circle mx-auto display-block m-8 logo">
+                    </p>
+                        <div class="form-group">
+                            <label for="quantity">Ingrese cantidad</label>
+                            <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Cantidad">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <input type="text" name="description" class="form-control" id="description" placeholder="Breve descripción">
+                        </div>
+                        <label for="add">Agregar a pedido</label>
+                        <div class="form-check mx-auto">
+                            <input class="form-check-input position-static" type="checkbox" id="add" value="option1" aria-label="...">
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <h4 class="card-title d-flex justify-content-between align-items-center">
+                        Toallas       
+                    </h4>
+                    <p>
+                        <img src="img/offer2.jpg" alt="toallas" class="rounded-circle mx-auto display-block m-8 logo">
+                    </p>
+                        <div class="form-group">
+                            <label for="quantity">Ingrese cantidad</label>
+                            <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Cantidad">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <input type="text" name="description" class="form-control" id="description" placeholder="Breve descripción">
+                        </div>
+                         <label for="add">Agregar a pedido</label>
+                        <div class="form-check mx-auto">
+                            <input class="form-check-input position-static" type="checkbox" id="add" value="option1" aria-label="...">
+                        </div>
+                </div>
+            </div>
+        </div>
+    <button class="btn btn-primary btn-block btn-sm" type="submit">
+        Generar Pedido
+    </button>
+    </form>
+</div>
