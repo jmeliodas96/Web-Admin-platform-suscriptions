@@ -34,7 +34,7 @@ router.get('/users/logout', (req, res) => {
 
 // register user
 router.post('/users/signup', async (req, res) => {
-    const {name, email, password, confirm_password } = req.body;
+    const {name, email, telephone, password, confirm_password } = req.body;
     
     const errors = [];
     if(name.length <= 0){
@@ -43,6 +43,10 @@ router.post('/users/signup', async (req, res) => {
     if(email.length <= 0){
         errors.push({text:'Inserte email porfavor!'})
     }
+    if(telephone.length <= 0){
+        errors.push({text:'Inserte numero telefonico porfavor!'})
+    }
+
     if(password.length <= 0){
         errors.push({text:'Inserte password porfavor!'})
     }
@@ -71,7 +75,7 @@ router.post('/users/signup', async (req, res) => {
         //     res.redirect('/users/signup');
 
         // }
-        const newUser =  new User({name, email, password, confirm_password});
+        const newUser =  new User({name, email, telephone, password, confirm_password});
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
         req.flash('success_msg', 'Te has registrado exitosamente!');

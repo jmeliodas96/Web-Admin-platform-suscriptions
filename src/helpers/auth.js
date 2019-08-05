@@ -11,7 +11,7 @@ helpers.isAuthenticated = (req, res, next) => {
     }
     // else
     req.flash('error_msg', 'No Autorizado');
-    res.redirect('/suscribe');
+    res.redirect('/users/signup');
 }   
 
 
