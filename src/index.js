@@ -6,6 +6,8 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
+const log = console.log;
 
 // Initializations
     // bootstrap app
@@ -14,11 +16,14 @@ const app = express();
 require('./database');
     //passport 
 require('./config/passport');
+    // email
+require('./config/email');
 
 // Settings
 
     // local and cloud
 app.set('port', process.env.PORT || 4000);
+    
     // path views concatenate to src > src/views
 app.set('views', path.join(__dirname, 'views'));
     // handlebars > engine template

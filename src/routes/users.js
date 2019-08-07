@@ -7,6 +7,8 @@ const User = require('../models/user');
 // passport
 const passport = require('passport');
 
+// email
+const { mailer } = require('../config/email');
 
 // get form for signin
 router.get('/users/signin', (req, res) => {
@@ -35,7 +37,7 @@ router.get('/users/logout', (req, res) => {
 // register user
 router.post('/users/signup', async (req, res) => {
     const {name, email, telephone, password, confirm_password } = req.body;
-    
+
     const errors = [];
     if(name.length <= 0){
         errors.push({text:'Inserte nombre porfavor!'})
@@ -75,11 +77,26 @@ router.post('/users/signup', async (req, res) => {
         //     res.redirect('/users/signup');
 
         // }
-        const newUser =  new User({name, email, telephone, password, confirm_password});
-        newUser.password = await newUser.encryptPassword(password);
-        await newUser.save();
-        req.flash('success_msg', 'Te has registrado exitosamente!');
-        res.redirect('/users/signin');
+        let mailOptions = {
+            from: 'jmena0396@gmail.com',
+            to:'menajm96@gmail.com',
+            subject:'Pedidos don bosco',
+            text:'Bienvenido a nuestro sistema de pedidos.'
+        };
+
+        try {
+            const newUser =  new User({name, email, telephone, password, confirm_password});
+            newUser.password = await newUser.encryptPassword(password);
+            await newUser.save();
+            
+            await mailer.sendMail(mailOptions);
+            req.flash('success_msg', 'Te has registrado exitosamente!');
+            res.redirect('/users/signin');        
+            
+        }catch(err) {
+            console.error(err);
+        }
+        
     }
 
 });
