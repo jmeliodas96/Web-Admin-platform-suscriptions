@@ -23,7 +23,7 @@ router.get('/users/signup', (req, res) => {
 
 // init session and authenticate user
 router.post('/users/signin', passport.authenticate('local', {
-    successRedirect:'/products',
+    successRedirect:'/modules',
     failureRedirect:'/users/signin',
     failureFlash: true
 }));
@@ -77,6 +77,7 @@ router.post('/users/signup', async (req, res) => {
         //     res.redirect('/users/signup');
 
         // }
+        console.log(email);
         let mailOptions = {
             from: 'jmena0396@gmail.com',
             to:'menajm96@gmail.com',

@@ -25,6 +25,11 @@ router.get('/suscribe', (req, res) => {
     res.render('offers');
 });
 
+// modules
+router.get('/modules', (req, res) => {
+    res.render('module');
+});
+
 // adding offer
 router.post('/suscribe/add', async (req, res) => {
     const { quantity, description } = req.body;
