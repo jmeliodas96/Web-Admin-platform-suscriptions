@@ -72,32 +72,28 @@ router.post('/users/signup', async (req, res) => {
         });
     } else {
         const emailUser = await User.findOne({email: email});
-        // if(!emailUser) {
-        //     req.flash('error_msg', 'El email ya esta en uso!');
-        //     res.redirect('/users/signup');
+        if(emailUser) {
+            req.flash('error', 'El correo ya esta en uso, ingrese uno nuevo.');
+            res.redirect('/users/signup');
 
-        // }
-        console.log(email);
-        let mailOptions = {
-            from: 'jmena0396@gmail.com',
-            to:'menajm96@gmail.com',
-            subject:'Pedidos don bosco',
-            text:'Bienvenido a nuestro sistema de pedidos.'
-        };
-
-        try {
-            const newUser =  new User({name, email, telephone, password, confirm_password});
-            newUser.password = await newUser.encryptPassword(password);
-            await newUser.save();
-            
-            await mailer.sendMail(mailOptions);
-            req.flash('success_msg', 'Te has registrado exitosamente!');
-            res.redirect('/users/signin');        
-            
-        }catch(err) {
-            console.error(err);
+        } else{
+            try {
+                let mailOptions = {
+                    from: 'jmena0396@gmail.com',
+                    to:email,
+                    subject:'Pedidos don bosco',
+                    text:`Bienvenido a nuestro sistema de pedidos ` + name
+                };        
+                const newUser =  new User({name, email, telephone, password, confirm_password});
+                newUser.password = await newUser.encryptPassword(password);
+                await newUser.save();
+                await mailer.sendMail(mailOptions);
+                req.flash('success_msg', 'Te has registrado exitosamente!');
+                res.redirect('/users/signin');        
+            }catch(err) {
+                console.error(err);
+            }
         }
-        
     }
 
 });

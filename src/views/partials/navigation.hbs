@@ -15,15 +15,19 @@
 
     </ul>
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Continuar
+          Bienvenido {{user.name}}
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/users/signin">Iniciar Sesión</a>
-          <a class="dropdown-item" href="/users/signup">Registrarse</a>
-          <a class="dropdown-item" href="/users/logout">Logout</a>
-        </div>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+      {{#if user}}
+        <a class="dropdown-item" href="/users/logout">Salir</a>
+      {{else}}
+        <a class="dropdown-item" href="/users/signin">Iniciar Sesión</a>
+        <a class="dropdown-item" href="/users/signup">Registrarse</a>
+      {{/if}} 
+      </div>
       </li>
     </ul>
   </div>

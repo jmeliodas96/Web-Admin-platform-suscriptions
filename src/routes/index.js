@@ -4,10 +4,13 @@ const router = express.Router();
 
 // models
 const Order = require('../models/order');
+// auth
+const { isAuthenticated } = require('../helpers/auth');
 
 // get login
 router.get('/', (req,res) => {
     res.render('index')
+    // res.render('users/signin');
 })
 
 // get about
@@ -26,7 +29,7 @@ router.get('/suscribe', (req, res) => {
 });
 
 // modules
-router.get('/modules', (req, res) => {
+router.get('/modules', isAuthenticated, (req, res) => {
     res.render('module');
 });
 

@@ -4,8 +4,11 @@
     <hr class="my-4">
     <p>El sitio Don Bosco te ofrece una solución para el manejo de tus pedidos en tiempo real mediante su sistema de notificaciones por email.
     </p>
-
-    <a href="/users/signin" class="btn btn-primary btn-lg">Ingresar</a>
-    <a href="/suscribe" class="btn btn-primary btn-lg">Suscribir</a>
+    {{#if user}}
+        <a href="/modules" class="btn btn-primary btn-lg">Regresar</a>
+    {{else}}
+        <a href="/users/signin" class="btn btn-primary btn-lg">Ingresar</a>
+        <a href="/suscribe" class="btn btn-primary btn-lg">Generar Pedido</a>
+    {{/if}}
     </div>
 </div>
