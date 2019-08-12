@@ -20,6 +20,11 @@ router.get('/users/signup', (req, res) => {
     res.render('users/signup');
 });
 
+// show all users
+router.get('/users/all-users', async (req, res) => {
+    const users = await User.find().sort({date: 'desc'});
+    res.render('users/all-users', { users });
+});
 
 // init session and authenticate user
 router.post('/users/signin', passport.authenticate('local', {

@@ -1,17 +1,31 @@
+
+<div class="container-fluid">
+<a href="/products/add" class="btn btn-primary btn-lg">Agregar Producto</a>
+<a href="/modules" class="btn btn-primary btn-lg m-2">Regresar</a>
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+  </ul>
+</nav>
 <div class="row">
     {{#each products }}
-        <div class="col-md-3">
-            <div class="card">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card h-100 p-2">
                 <div class="card-body">
+                {{!-- <div class="card-body text-center"> --}}
                     <p class="lead"> Nombre producto: </p>
                     <h4 class="card-title d-flex justify-content-between align-items-center">
                         {{name}} <a href="/products/edit/{{_id}}"><i class="fas fa-edit"></i></a>
                     </h4>
-                    <p>
+                    <p class="card-text">
                         {{description}}
                     </p>
                     <p class="lead"> Expira: </p>
-                    <p>
+                    <p class="card-text">
                         {{enddate}}
                     </p>
                     <form action="/products/delete/{{_id}}?_method=DELETE" method="POST">
@@ -31,4 +45,5 @@
             </div>
         </div>
     {{/each}}
+</div>
 </div>

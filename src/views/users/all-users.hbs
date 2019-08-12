@@ -1,0 +1,25 @@
+<a href="/products/add" class="btn btn-primary btn-lg">Agregar Cliente</a>
+<a href="/modules" class="btn btn-primary btn-lg m-2">Regresar</a>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Fecha de creación</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{email}}</td>
+      <td>{{telephone}}</td>
+      <td>{{date}}</td>
+      <td><a href="/modules" class="btn btn-primary">Editar</a></td>
+      <td><a href="/modules" class="btn btn-danger">Eliminar</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
