@@ -3,6 +3,7 @@ const router = express.Router();
 
 // models is like a class(schema)
 const Product = require('../models/product');
+const Order = require('../models/order');
 // auth
 const { isAuthenticated } = require('../helpers/auth');
 
@@ -12,6 +13,12 @@ router.get('/products', isAuthenticated, async (req, res) => {
     const products =  await Product.find().sort({date: 'desc'});
     // render and pass object
     res.render('products/all-products', { products });
+});
+
+// retrieve all orders 
+router.get('/products/all-orders', async (req, res) => {
+    const orders = await Order.find().sort({date:'desc'});
+    res.render('products/all-orders', { orders });
 });
 
 // form for add product
